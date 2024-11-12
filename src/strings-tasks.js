@@ -342,12 +342,10 @@ function countVowels(str) {
  *   isPalindrome('No lemon, no melon') => true
  */
 function isPalindrome(str) {
-  const reversed = Array.from(str.replace(/[^a-zA-Z0-9]/g, ''))
+  const reversed = Array.from(str.replace(/[^a-zA-Z]/g, ''))
     .reverse()
     .join('');
-  return (
-    reversed.toLowerCase() === str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase()
-  );
+  return reversed.toLowerCase() === str.replace(/[^a-zA-Z]/g, '').toLowerCase();
 }
 
 /**
@@ -383,8 +381,13 @@ function findLongestWord(sentence) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  const words = str.split(' ');
+  const reversedWords = [];
+  for (let i = 0; i < words.length; i += 1) {
+    reversedWords.push(words[i].split('').reverse().join(''));
+  }
+  return reversedWords.join(' ');
 }
 
 /**
@@ -398,8 +401,10 @@ function reverseWords(/* str */) {
  *   invertCase('JavaScript is Fun') => 'jAVAsCRIPT IS fUN'
  *   invertCase('12345') => '12345'
  */
-function invertCase(/* str */) {
-  throw new Error('Not implemented');
+function invertCase(str) {
+  return str.replaceAll(/[a-zA-Z]/g, (match) =>
+    match === match.toLowerCase() ? match.toUpperCase() : match.toLowerCase()
+  );
 }
 
 /**
@@ -415,8 +420,8 @@ function invertCase(/* str */) {
  *   getStringFromTemplate('John','Doe') => 'Hello, John Doe!'
  *   getStringFromTemplate('Chuck','Norris') => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(/* firstName, lastName */) {
-  throw new Error('Not implemented');
+function getStringFromTemplate(firstName, lastName) {
+  return `Hello, ${firstName} ${lastName}!`;
 }
 
 /**
@@ -429,8 +434,11 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  return value
+    .replace('Hello', '')
+    .replace(/[^a-zA-Z\s]/g, '')
+    .trim();
 }
 
 /**
